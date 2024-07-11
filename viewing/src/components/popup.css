@@ -1,0 +1,66 @@
+/* popup.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    width: 600px; /* 팝업 너비 */
+    height: 400px; /* 팝업 높이 자동 조절 */
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #ff5c5c;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 25px;
+  }
+  
+  .popup-box {
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .select-container {
+    display: flex;
+
+  }
+  
+  .text-content {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .highlight {
+    color: #007BFF;
+  }
+  

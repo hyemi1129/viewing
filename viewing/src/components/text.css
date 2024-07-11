@@ -1,0 +1,12 @@
+.text{
+    position: absolute;
+    right: 42%;
+    top: 3%;
+    transform: translate(-42%, -3%);
+    font-size: 80px;
+    text-align: left;
+}
+
+.blue{
+    color: rgb(71, 115, 248);
+}   
