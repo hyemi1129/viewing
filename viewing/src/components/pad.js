@@ -18,6 +18,29 @@ function Pad({ onOpenPopup }) {
 
     const isPhoneNumberValid = phoneNumber.length === 13;
 
+    const handleConfirm = async () => {
+        if (isPhoneNumberValid) {
+            try {
+                const response = await fetch('http://10.150.150.181:5000/submit-phone', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ phoneNumber }),
+                });
+                if (response.ok) {
+                    console.log('Phone number submitted successfully');
+                    onOpenPopup(); // 팝업 열기
+                } else {
+                    const errorData = await response.json();
+                    console.error('Failed to submit phone number', errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    };
+
     return (
         <div className="pad">
             <svg width="438" height="612" viewBox="0 0 438 612" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +63,7 @@ function Pad({ onOpenPopup }) {
                 </foreignObject>
                 <foreignObject x="10" y="480" width="418" height="100">
                     <div className="button-container">
-                        <button className="my-button" onClick={onOpenPopup} disabled={!isPhoneNumberValid}>확인</button>
+                        <button className="my-button" onClick={handleConfirm} disabled={!isPhoneNumberValid}>확인</button>
                     </div>
                 </foreignObject>
                 <defs>

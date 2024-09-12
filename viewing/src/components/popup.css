@@ -1,66 +1,102 @@
-/* popup.css */
+/* 팝업 전체 오버레이 스타일 */
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .popup-content {
-    background: white;
-    padding: 20px;
-    width: 600px; /* 팝업 너비 */
-    height: 400px; /* 팝업 높이 자동 조절 */
-    border-radius: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    position: relative;
-  }
-  
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    background: #ff5c5c;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    line-height: 25px;
-  }
-  
-  .popup-box {
-    margin-top: 40px;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .select-container {
-    display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  }
-  
-  .text-content {
-    margin-top: 20px;
-    font-size: 20px;
-  }
-  
-  .highlight {
-    color: #007BFF;
-  }
-  
+/* 팝업 내용 스타일 */
+.popup-content {
+  background: white;
+  padding: 40px; /* 내부 여백 증가 */
+  width: 600px; /* 가로 길이 설정 */
+  height: 500px; /* 세로 길이 설정 */
+  border-radius: 30px; /* 둥근 모서리 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 설정 */
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 닫기 버튼 스타일 */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #ff5c5c;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+/* 팝업 박스 스타일 */
+.popup-box {
+  width: 140%; /* 부모 컨테이너의 폭을 100% 사용 */
+  height: 300%;
+  max-width: 600px; /* 최대 폭 설정 */
+  padding: 40px; /* 내부 여백 증가 */
+  font-size: 20px; /* 폰트 크기 증가 */
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9; /* 배경색 추가 */
+  border-radius: 40px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 설정 */
+}
+
+/* 선택 버튼 컨테이너 스타일 */
+.select-container {
+  display: flex;
+  flex-direction: row; /* 버튼들을 가로로 배치 */
+  justify-content: center; /* 버튼들을 중앙에 정렬 */
+  margin-top: 30px;
+}
+
+/* 텍스트 컨텐츠 스타일 */
+.text-content {
+  margin-top: 20px;
+  font-size: 22px; /* 폰트 크기 증가 */
+  font-weight: bold; /* 굵은 텍스트 */
+}
+
+/* 강조 텍스트 스타일 */
+.highlight {
+  color: #007BFF;
+}
+
+/* 기본 버튼 스타일 (선택 버튼) */
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* 버튼 호버 스타일 */
+.button:hover {
+  background-color: #45a049;
+}

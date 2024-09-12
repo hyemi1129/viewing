@@ -3,23 +3,32 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Pad from './components/pad';
 import Text from './components/text';
-import Popup from './components/popup';
+import Popup from './components/popup'; // Popup import 추가
 import Explain from './components/explain';
 import Explain2 from './components/explain2';
-import TrashSelect from './components/trashselect';
+import Trash from './components/trash';
+import Popup2 from './components/popup2';
+import Popup21 from './components/popup21';
+import Popup22 from './components/popup22';
+import Popup3 from './components/popup3';
+import Mypage from './components/mypage';
 
 const AppContent = () => {
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // 상태 추가
 
-  const togglePopup = () => {
-    setPopupOpen(!isPopupOpen);
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
   };
 
   return (
     <div>
-      <Pad onOpenPopup={togglePopup} />
+      <Pad onOpenPopup={openPopup} />
       <Text />
-      {isPopupOpen && <Popup onClose={togglePopup} />}
+      {isPopupOpen && <Popup onClose={closePopup} />} {/* Popup 표시 */}
     </div>
   );
 };
@@ -29,9 +38,15 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<AppContent />} />
+        <Route path="pad" element={<Pad />} />
         <Route path="/explain" element={<Explain />} />
         <Route path="/explain2" element={<Explain2 />} />
-        <Route path="/trashselect" element={<TrashSelect />} />
+        <Route path="/trash" element={<Trash />} />
+        <Route path="/popup2" element={<Popup2 />} />
+        <Route path="/popup21" element={<Popup21 />} />
+        <Route path="/popup22" element={<Popup22 />} />
+        <Route path="/popup3" element={<Popup3 />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </Router>
   );

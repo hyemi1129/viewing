@@ -1,0 +1,57 @@
+/* popup3.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    width: 400px; /* 가로 길게 설정 */
+    height: 300px; /* 정사각형에서 약간 길게 설정 */
+    border-radius: 20px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    justify-content: center;
+    align-items: center;
+}
+
+.text-content {
+    font-size: 20px; /* 텍스트 크기 조정 */
+    font-weight: bolder; /* 글꼴 두께 조정 */
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 버튼 사이의 간격 */
+}
+
+.popup-button {
+    width: 100px; /* 버튼의 가로 크기를 200px로 설정 */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+.popup-button:hover {
+    background-color: #0056b3;
+}
