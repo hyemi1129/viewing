@@ -5,7 +5,7 @@ import Popup22 from './popup22'; // Popup2 컴포넌트를 import 합니다.
 // 서버에 쓰레기 종류를 전송하는 함수
 const trashDivision = async (trashType) => {
     try {
-        const response = await fetch('http://10.150.150.181:5000/trash-kind', {
+        const response = await fetch('https://1e0f-39-113-58-6.ngrok-free.app/label', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

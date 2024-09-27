@@ -3,7 +3,7 @@ import './pad.css';
 
 function Pad({ onOpenPopup }) {
     const [phoneNumber, setPhoneNumber] = useState('');
-
+    
     const handleButtonClick = (value) => {
         if (phoneNumber.length === 3 || phoneNumber.length === 8) {
             setPhoneNumber(phoneNumber + '-' + value);
@@ -21,7 +21,7 @@ function Pad({ onOpenPopup }) {
     const handleConfirm = async () => {
         if (isPhoneNumberValid) {
             try {
-                const response = await fetch('http://10.150.150.181:5000/submit-phone', {
+                const response = await fetch('https://1e0f-39-113-58-6.ngrok-free.app/submit-phone', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -29,8 +29,10 @@ function Pad({ onOpenPopup }) {
                     body: JSON.stringify({ phoneNumber }),
                 });
                 if (response.ok) {
-                    console.log('Phone number submitted successfully');
-                    onOpenPopup(); // 팝업 열기
+                    const data = await response.json();
+                    const lastFourDigits = phoneNumber.slice(-4); // 마지막 4자리 추출
+                    console.log('Phone number submitted successfully', data.nickname);
+                    onOpenPopup(data.nickname, lastFourDigits); // 닉네임과 마지막 4자리를 팝업에 전달
                 } else {
                     const errorData = await response.json();
                     console.error('Failed to submit phone number', errorData.message);
@@ -40,6 +42,10 @@ function Pad({ onOpenPopup }) {
             }
         }
     };
+    
+
+    const lineLength = 438 * 0.8; // 가로선의 길이 (80%)
+    const lineYPosition = 160; // 가로선의 Y 위치 (원하는 위치로 설정)
 
     return (
         <div className="pad">
@@ -47,6 +53,15 @@ function Pad({ onOpenPopup }) {
                 <g filter="url(#filter0_d_524_48)">
                     <rect x="10" y="6" width="418" height="592" rx="50" fill="white" />
                 </g>
+                <line 
+                    x1={(438 - lineLength) / 2} 
+                    y1={lineYPosition} 
+                    x2={(438 + lineLength) / 2} 
+                    y2={lineYPosition} 
+                    stroke="lightgray" 
+                    strokeWidth="2" 
+                    strokeLinecap="round"
+                />
                 <foreignObject x="10" y="20" width="418" height="460">
                     <div className="phone-number-display">{phoneNumber}</div>
                     <div className="keypad">

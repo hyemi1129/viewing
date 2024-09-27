@@ -2,7 +2,7 @@
   "name": "viewing",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://10.150.150.181:5000",
+  "proxy": "https://1e0f-39-113-58-6.ngrok-free.app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

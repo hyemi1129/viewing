@@ -1,6 +1,6 @@
 .svg-container {
     position: absolute;
-    right: 150px;/* 화면의 오른쪽 끝으로 이동 */
+    right: 250px;/* 화면의 오른쪽 끝으로 이동 */
     top: 50%; /* 화면 중앙에 위치 */
     transform: translateY(-50%); /* 화면 중앙 맞춤 */
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './popup3.css';
+import check from './check.png';
 
 const Popup5 = ({ onClose }) => {
   const navigate = useNavigate();
@@ -26,8 +27,10 @@ const Popup5 = ({ onClose }) => {
     <div className="popup-overlay" onClick={handleOverlayClick}>
       <div className="popup-content">
         <div className="text-content">
+        <img src={check} alt="check" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
+
           정답입니다
-          <p style={{ fontSize: '20px', fontWeight: 'normal', color: 'gray' }}>
+          <p style={{ fontSize: '15px', fontWeight: 'normal', color: 'gray' }}>
             +200캐시<br />캐시를 획득했어요
           </p>
         </div>

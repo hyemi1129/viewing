@@ -15,15 +15,16 @@
 /* 팝업 내용 스타일 */
 .popup-content {
   background: white;
-  padding: 40px; /* 내부 여백 증가 */
-  width: 600px; /* 가로 길이 설정 */
-  height: 500px; /* 세로 길이 설정 */
-  border-radius: 30px; /* 둥근 모서리 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 설정 */
+  padding: 40px;
+  width: 600px;
+  height: 500px;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: flex;
-  flex-direction: column; /* 세로 방향으로 정렬 */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: auto; 
 }
 
 /* 닫기 버튼 스타일 */
@@ -42,39 +43,37 @@
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  line-height: 40px;
 }
 
-/* 팝업 박스 스타일 */
 .popup-box {
-  width: 140%; /* 부모 컨테이너의 폭을 100% 사용 */
-  height: 300%;
-  max-width: 600px; /* 최대 폭 설정 */
-  padding: 40px; /* 내부 여백 증가 */
-  font-size: 20px; /* 폰트 크기 증가 */
-  font-weight: bold;
+  width: 145%;
+  max-width: 700px;
+  height: 500px; /* 픽셀로 고정 */
+  padding: 40px;
+  font-size: 15px;
+  font-weight: normal;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f9f9f9; /* 배경색 추가 */
-  border-radius: 40px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 설정 */
+  background-color: #f9f9f9;
+  border-radius: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
 
 /* 선택 버튼 컨테이너 스타일 */
 .select-container {
   display: flex;
-  flex-direction: row; /* 버튼들을 가로로 배치 */
-  justify-content: center; /* 버튼들을 중앙에 정렬 */
+  justify-content: center;
   margin-top: 30px;
 }
 
-/* 텍스트 컨텐츠 스타일 */
+/* 텍스트 콘텐츠 스타일 */
 .text-content {
-  margin-top: 20px;
-  font-size: 22px; /* 폰트 크기 증가 */
-  font-weight: bold; /* 굵은 텍스트 */
+  font-weight: normal !important;
+  font-size: 20px !important;
 }
+
 
 /* 강조 텍스트 스타일 */
 .highlight {
@@ -90,10 +89,11 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 8px;
+  font-weight: normal;
 }
 
 /* 버튼 호버 스타일 */

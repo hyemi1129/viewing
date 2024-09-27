@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Pad from './components/pad';
 import Text from './components/text';
-import Popup from './components/popup'; // Popup import 추가
+import Popup from './components/popup';
 import Explain from './components/explain';
 import Explain2 from './components/explain2';
 import Trash from './components/trash';
@@ -11,10 +11,11 @@ import Popup2 from './components/popup2';
 import Popup21 from './components/popup21';
 import Popup22 from './components/popup22';
 import Popup3 from './components/popup3';
+import Popup5 from './components/popup5';
 import Mypage from './components/mypage';
 
-const AppContent = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // 상태 추가
+const AppContent = ({ nickname, onNicknameReceived }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -26,18 +27,24 @@ const AppContent = () => {
 
   return (
     <div>
-      <Pad onOpenPopup={openPopup} />
+      <Pad onOpenPopup={openPopup} onNicknameReceived={onNicknameReceived} />
       <Text />
-      {isPopupOpen && <Popup onClose={closePopup} />} {/* Popup 표시 */}
+      {isPopupOpen && <Popup onClose={closePopup} />}
     </div>
   );
 };
 
 function App() {
+  const [nickname, setNickname] = useState(''); // nickname 상태 추가
+
+  const handleNicknameReceived = (receivedNickname) => {
+    setNickname(receivedNickname);
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AppContent />} />
+        <Route path="/" element={<AppContent nickname={nickname} onNicknameReceived={handleNicknameReceived} />} />
         <Route path="pad" element={<Pad />} />
         <Route path="/explain" element={<Explain />} />
         <Route path="/explain2" element={<Explain2 />} />
@@ -46,7 +53,8 @@ function App() {
         <Route path="/popup21" element={<Popup21 />} />
         <Route path="/popup22" element={<Popup22 />} />
         <Route path="/popup3" element={<Popup3 />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage" element={<Mypage nickname={nickname} />} />
+        <Route path="/popup5" element={<Popup5 />} />
       </Routes>
     </Router>
   );

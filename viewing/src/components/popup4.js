@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './popup3.css'; // 스타일시트 import
+import x from './x.png';
 
 const Popup4 = ({ onClose }) => {
   const navigate = useNavigate();
@@ -26,8 +27,9 @@ const Popup4 = ({ onClose }) => {
     <div className="popup-overlay" onClick={handleOverlayClick}>
       <div className="popup-content">
         <div className="text-content">
+        <img src={x} alt="x" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
           오답입니다
-          <p style={{ fontSize: '20px', fontWeight: 'normal', color: 'gray' }}>
+          <p style={{ fontSize: '15px', fontWeight: 'normal', color: 'gray' }}>
             -200캐시<br />캐시를 잃어버렸어요 분발하세요
           </p>
         </div>
