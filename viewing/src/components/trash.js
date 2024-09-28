@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import './trash.css'; // CSS 파일을 import 합니다.
-import Popup22 from './popup22'; // Popup22 컴포넌트를 import 합니다.
+import Popup22 from './popup22'; // 로딩 팝업 컴포넌트
+import Popup5 from './popup5'; // 맞다는 팝업 컴포넌트
+import Popup4 from './popup4';
 import plastic from './plastic.png';
 import vinyl from './vinyl.png';
 import can from './can.png';
 import trash from './trash.png'; // 일반쓰레기 이미지
 
-// 서버에 쓰레기 종류를 전송하는 함수
+
 const trashDivision = async (trashType) => {
     try {
-        const response = await fetch('https://1e0f-39-113-58-6.ngrok-free.app/label', {
+        const response = await fetch('https://dddb-39-113-58-6.ngrok-free.app/label', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ trash: trashType })
         });
-        if (response.ok) {
-            console.log('Trash type submitted successfully.');
-        } else {
-            console.error('Failed to submit trash type:', response.statusText);
-        }
+        const result = await response.json(); 
+        return result; 
     } catch (error) {
         console.error('Error:', error);
     }
@@ -28,19 +27,46 @@ const trashDivision = async (trashType) => {
 
 const Trash = () => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup22, setShowPopup22] = useState(false); // 로딩팝업
+    const [showPopup5, setShowPopup5] = useState(false);   // 정답팝업
+    const [showPopup4, setShowPopup4] = useState(false);   // 오답팝업
+    const [compareResult, setCompareResult] = useState(null); // 서버로 받은 결과 상태
+    const [prevScore, setPrevScore] = useState(0); // 이전 점수
 
     // 버튼 클릭 시 호출되는 핸들러
     const handleClick = async (type) => {
         setSelectedOption(type); // 선택된 버튼 업데이트
+        setShowPopup22(true); 
         console.log(`${type} 버튼 클릭됨`);
-        await trashDivision(type); // 서버에 쓰레기 종류 제출
-        setShowPopup(true); // 팝업 열기
+
+        const result = await trashDivision(type); 
+
+        
+        setTimeout(() => {
+            setShowPopup22(false);
+
+            // 서버 결과가 이전 점수보다 클 경우
+            if (result && result.score > prevScore) {
+                setCompareResult(result);
+                setShowPopup5(true); 
+                setPrevScore(result.score); // 이전 점수 업데이트
+            }
+            //이전 점수보다 작을 경우
+            else if (result && (result.score < prevScore)) {
+                setCompareResult(result);
+                setShowPopup4(true); 
+                setPrevScore(result.score);
+            }
+            
+        }, 2000); // 2초 동안 로딩 팝업 유지
     };
 
-    const handleClosePopup = () => {
-        setShowPopup(false); // 팝업 닫기
+    const handleClosePopup5 = () => {
+        setShowPopup5(false); // 맞다는 팝업 닫기
     };
+    const handleClosePopup4 = () => {
+        setShowPopup4(false);
+    }
 
     return (
         <div style={{ paddingLeft: '150px', marginTop: '40px' }}>
@@ -88,7 +114,9 @@ const Trash = () => {
                 ))}
             </div>
 
-            {showPopup && <Popup22 onClose={handleClosePopup} />}
+            {showPopup22 && <Popup22 />} {/* 로딩 팝업 표시 */}
+            {showPopup5 && <Popup5 onClose={handleClosePopup5} />} {/* 정답 팝업 표시 */}
+            {showPopup4 && <Popup4 onClose={handleClosePopup4} />} {/* 오답 팝업 표시 */}
         </div>
     );
 };
