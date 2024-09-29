@@ -21,7 +21,7 @@ function Pad({ onOpenPopup }) {
     const handleConfirm = async () => {
         if (isPhoneNumberValid) {
             try {
-                const response = await fetch('https://dddb-39-113-58-6.ngrok-free.app/submit-phone', {
+                const response = await fetch('http://10.150.150.181:8080/submit-phone', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

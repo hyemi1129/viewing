@@ -11,7 +11,7 @@ import trash from './trash.png'; // 일반쓰레기 이미지
 
 const trashDivision = async (trashType) => {
     try {
-        const response = await fetch('https://dddb-39-113-58-6.ngrok-free.app/label', {
+        const response = await fetch('http://10.150.150.181:8080/label', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
