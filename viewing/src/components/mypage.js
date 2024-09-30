@@ -8,6 +8,7 @@ const Mypage = ({ nickname }) => {
   const [trashCounts, setTrashCounts] = useState([]);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [rankings, setRankings] = useState([]);
 
   useEffect(() => {
     const fetchTrashCounts = async () => {
@@ -17,17 +18,14 @@ const Mypage = ({ nickname }) => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-
         setTrashCounts([
-          { trash_type: '플라스틱', count: data.plastic_count },  // data.plastic_count로 수정
-          { trash_type: '비닐', count: data.vinyl_count },      // data.vinyl_count로 수정
-          { trash_type: '캔', count: data.can_count },          // data.can_count로 수정
-          { trash_type: '일반쓰레기', count: data.general_count }, // data.general_count로 수정
+          { trash_type: '플라스틱', count: data.plastic_count },
+          { trash_type: '비닐', count: data.vinyl_count },
+          { trash_type: '캔', count: data.can_count },
+          { trash_type: '일반쓰레기', count: data.general_count },
         ]);
       } catch (error) {
         console.error('Error fetching trash counts:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -44,8 +42,23 @@ const Mypage = ({ nickname }) => {
       }
     };
 
+    const fetchRankings = async () => {
+      try {
+        const response = await fetch('/rankings');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setRankings(data); // 랭킹 데이터 배열로 설정
+      } catch (error) {
+        console.error('Error fetching rankings:', error);
+      }
+    };
+
     fetchTrashCounts();
     fetchScore();
+    fetchRankings();
+    setLoading(false);
   }, [nickname]);
 
   const labels = ['플라스틱', '비닐', '캔', '일반쓰레기'];
@@ -152,13 +165,26 @@ const Mypage = ({ nickname }) => {
           }}>
             <div style={{
               marginTop: '20px',
-              fontSize: '24px',
-              fontWeight: 'bold',
+              fontSize: '20px',
               color: 'black',
               textAlign: 'center',
             }}>
               이번 달 등수는
             </div>
+            {rankings.map((rank, index) => (
+              <div key={index} style={{
+                marginTop: '10px',
+                fontSize: '16px',
+                color: 'black',
+                textAlign: 'center',
+                backgroundColor: 'rgba(200, 200, 200, 0.5)',
+                borderRadius: '10px',
+                padding: '10px',
+                width: '80%', // 너비를 조정하여 중앙 정렬
+              }}>
+                {rank.rank}위 {rank.nickname}
+              </div>
+            ))}
           </div>
         </div>
       </div>

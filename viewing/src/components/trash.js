@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './trash.css'; // CSS 파일을 import 합니다.
 import Popup22 from './popup22'; // 로딩 팝업 컴포넌트
-import Popup5 from './popup5'; // 맞다는 팝업 컴포넌트
+import Popup5 from './popup6'; // 맞다는 팝업 컴포넌트
 import Popup4 from './popup4';
 import plastic from './plastic.png';
 import vinyl from './vinyl.png';

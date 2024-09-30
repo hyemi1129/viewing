@@ -11,7 +11,7 @@ import Popup2 from './components/popup2';
 import Popup21 from './components/popup21';
 import Popup22 from './components/popup22';
 import Popup3 from './components/popup3';
-import Popup5 from './components/popup5';
+import Popup6 from './components/popup6';
 import Mypage from './components/mypage';
 
 const AppContent = ({ nickname, onNicknameReceived }) => {
@@ -54,7 +54,7 @@ function App() {
         <Route path="/popup22" element={<Popup22 />} />
         <Route path="/popup3" element={<Popup3 />} />
         <Route path="/mypage" element={<Mypage nickname={nickname} />} />
-        <Route path="/popup5" element={<Popup5 />} />
+        <Route path="/popup6" element={<Popup6 />} />
       </Routes>
     </Router>
   );

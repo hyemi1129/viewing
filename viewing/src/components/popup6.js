@@ -1,25 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './popup3.css';
-import check from './check.png';
+import check from './check.png'; // 확인 이미지
 
-const Popup5 = ({ onClose }) => {
+const Popup6 = ({ onClose = () => {} }) => {
   const navigate = useNavigate();
 
-  // 돌아가기 버튼 클릭 시 홈 페이지로 이동
   const handleGoBack = () => {
     navigate('/'); // 홈 페이지로 이동
   };
 
-  // 다음으로 버튼 클릭 시 MyPage 페이지로 이동
   const handleNext = () => {
     navigate('/mypage'); // MyPage 페이지로 이동
   };
 
-  // 팝업 외부 클릭 시 팝업 닫기
   const handleOverlayClick = (e) => {
     if (e.target.className === 'popup-overlay') {
-      onClose(); // 팝업 닫기
+      if (typeof onClose === 'function') {
+        onClose(); // 팝업 닫기
+      } else {
+        console.error('onClose is not a function');
+      }
     }
   };
 
@@ -27,9 +27,8 @@ const Popup5 = ({ onClose }) => {
     <div className="popup-overlay" onClick={handleOverlayClick}>
       <div className="popup-content">
         <div className="text-content">
-        <img src={check} alt="check" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
-
-          정답입니다
+          <img src={check} alt="check" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
+          정답입니다.
           <p style={{ fontSize: '15px', fontWeight: 'normal', color: 'gray' }}>
             +200캐시<br />캐시를 획득했어요
           </p>
@@ -43,4 +42,4 @@ const Popup5 = ({ onClose }) => {
   );
 };
 
-export default Popup5;
+export default Popup6;

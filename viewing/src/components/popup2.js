@@ -1,49 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import './popup2.css'; // 스타일시트 import
-import { BarLoader } from 'react-spinners'; // BarLoader import
-import Popup3 from './popup3'; // Popup3 컴포넌트 import
+import React, { useState } from 'react';
+import Popup3 from './popup3'; // Popup6 import
 
-const Popup2 = ({ onClose }) => {
+const Popup22 = ({ onClose }) => {
   const [showPopup3, setShowPopup3] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null); // 정답 여부 상태
 
-  useEffect(() => {
-    // 5초 후에 Popup3으로 전환
-    const timer = setTimeout(() => {
-      setShowPopup3(true); // Popup3 표시
-    }, 5000);
-
-    return () => {
-      clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
-    };
-  }, []);
-
-  const handleClosePopup3 = () => {
-    setShowPopup3(false);
-    onClose(); // Popup2 닫기
+  const handleAnswerClick = (answer) => {
+    if (answer === '종이' || answer === '일반쓰레기') {
+      setIsCorrect(true);
+      setShowPopup3(true); // 정답 맞추면 Popup6로 전환
+    } else {
+      setIsCorrect(false);
+    }
   };
 
   if (showPopup3) {
-    return <Popup3 onClose={handleClosePopup3} />;
+    return <Popup3 onClose={onClose} />; // Popup6로 전환
   }
+
+  const buttonStyle = {
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    fontSize: '16px',
+    cursor: 'pointer',
+    margin: '5px',
+    borderRadius: '5px',
+    transition: 'background-color 0.3s ease',
+  };
 
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <div className="loader-wrapper">
-          <BarLoader
-            width={200} // 로더의 길이 조정
-            height={20} // 로더의 두께 조정
-            color="#007BFF" // 로더의 바 색상
-          />
-        </div>
-        <div className="text-content">
-          <div style={{ fontWeight: 'normal', fontSize: '20px' }}>
-          분리수거중...
+        <div style={{ fontWeight: 'normal', fontSize: '20px', textAlign: 'center' }}>
+          <p>얼룩진 피자 박스는 어느 분류에 속할까요?</p>
+          <div>
+            {['종이', '일반쓰레기', '플라스틱', '비닐', '캔'].map((answer) => (
+              <button
+                key={answer}
+                style={buttonStyle}
+                onClick={() => handleAnswerClick(answer)}
+              >
+                {answer}
+              </button>
+            ))}
           </div>
+          {isCorrect === false && <p style={{ color: 'red' }}>틀렸습니다. 다시 시도해주세요!</p>}
         </div>
       </div>
     </div>
   );
 };
 
-export default Popup2;
+export default Popup22;
