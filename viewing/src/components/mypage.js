@@ -49,7 +49,7 @@ const Mypage = ({ nickname }) => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setRankings(data); // 랭킹 데이터 배열로 설정
+        setRankings(data);
       } catch (error) {
         console.error('Error fetching rankings:', error);
       }
@@ -173,16 +173,22 @@ const Mypage = ({ nickname }) => {
             </div>
             {rankings.map((rank, index) => (
               <div key={index} style={{
-                marginTop: '10px',
-                fontSize: '16px',
-                color: 'black',
+                marginTop: '20px',
+                fontSize: '18px',
+                color: '#007BFF',
                 textAlign: 'center',
-                backgroundColor: 'rgba(200, 200, 200, 0.5)',
-                borderRadius: '10px',
-                padding: '10px',
-                width: '80%', // 너비를 조정하여 중앙 정렬
+                backgroundColor: 'white',
+                borderRadius: '50px',
+                padding: '20px',
+                width: '80%',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)'
               }}>
-                {rank.rank}위 {rank.nickname}
+                <span>{rank.rank}위 {rank.nickname}</span>
+                <span>{rank.score} 점</span> {/* 점수 추가 */}
               </div>
             ))}
           </div>
