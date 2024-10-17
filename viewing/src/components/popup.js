@@ -19,11 +19,32 @@ const Popup = ({ onClose }) => {
     };
   }, [onClose]);
 
+  const sendOptionToBackend = async (option) => {
+    try {
+      const response = await fetch('/auto-signal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'auto-signal': option }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send data to the server');
+      }
+      console.log('Option sent successfully');
+    } catch (error) {
+      console.error('Error sending option:', error);
+    }
+  };
+
   const handleSelectClick = (option) => {
+    sendOptionToBackend('manual'); // '수동'을 영어로 전송
     window.location.href = `/explain?option=${option}`;
   };
 
   const handleSelectClick2 = (option) => {
+    sendOptionToBackend('automatic'); // '자동'을 영어로 전송
     window.location.href = `/explain2?option=${option}`;
   };
 
