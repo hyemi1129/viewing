@@ -10,7 +10,7 @@ const Popup6 = ({ onClose = () => {} }) => {
   };
 
   const handleNext = () => {
-    navigate('/mypage'); // MyPage 페이지로 이동
+    navigate('/quiz'); // Quiz 페이지로 이동
   };
 
   const handleOverlayClick = (e) => {

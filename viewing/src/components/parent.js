@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import Popup22 from './popup22'; // Popup22 import
+import Quiz from './quzi'; // Popup22 import
 
 const ParentComponent = () => {
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
-  const handleOpenPopup = () => {
-    setIsPopupVisible(true);
+  const handleOpenQuiz = () => {
+    setIsQuizOpen(true);
   };
 
-  const handleClosePopup = () => {
-    setIsPopupVisible(false);
+  const handleCloseQuiz = () => {
+    setIsQuizOpen(false);
   };
 
   return (
     <div>
-      <button onClick={handleOpenPopup}>팝업 열기</button>
-      {isPopupVisible && <Popup22 onClose={handleClosePopup} />} {/* onClose prop 전달 */}
+      <button onClick={handleOpenQuiz}>퀴즈 열기</button>
+      {isQuizOpen && <Quiz onClose={handleCloseQuiz} />}
     </div>
   );
 };

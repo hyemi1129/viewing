@@ -1,0 +1,71 @@
+.quiz-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.quiz-content {
+  width: 50vw;  /* 가로 크기 줄임 */
+  height: 70vh;  /* 세로 크기 유지 */
+  background-color: white;
+  padding: 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.quiz-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.quiz-content p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.quiz-content button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quiz-content button:hover {
+  background-color: #45a049;
+}
+
+.answer-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 두 개의 열 유지 */
+  gap: 10px;
+  width: 70%;  /* 버튼 가로 길이 조금 더 좁힘 */
+  margin-top: 20px;
+}
+
+.answer-button {
+  width: 100%;  /* 버튼 가로 길이 */
+  padding: 80px 20px;  /* 세로 길이를 더 길고 두껍게 */
+  font-size: 18px;
+  background-color: transparent;
+  color: black;
+  border: 2px solid #007bff;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
