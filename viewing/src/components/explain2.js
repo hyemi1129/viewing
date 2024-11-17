@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import back2 from './back2.png'; // back2.png 이미지 경로
+import Quiz from './quiz'; // quiz.js 가져오기
 
 const Explain2 = () => {
   const navigate = useNavigate();
+  const [showQuiz, setShowQuiz] = useState(false); // Quiz 표시 여부 상태
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,8 +16,12 @@ const Explain2 = () => {
   }, [navigate]);
 
   const handleBackClick = () => {
-    navigate('/trash'); // 클릭 시 trash.js로 이동
+    setShowQuiz(true); // Quiz 표시
   };
+
+  if (showQuiz) {
+    return <Quiz />; // Quiz 컴포넌트를 렌더링
+  }
 
   return (
     <div style={{ 
