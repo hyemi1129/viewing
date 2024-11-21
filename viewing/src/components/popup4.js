@@ -30,7 +30,7 @@ const Popup4 = ({ onClose }) => {
           <img src={x} alt="x" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
           오답입니다
           <p style={{ fontSize: '15px', fontWeight: 'normal', color: 'gray' }}>
-            +50캐시<br />캐시를 잃어버렸어요 분발하세요
+            +50캐시<br />틀렸어요 분발하세요.
           </p>
         </div>
         <div className="button-container">

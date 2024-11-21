@@ -18,7 +18,7 @@ const trashDivision = async (trashType) => {
             body: JSON.stringify({ trash: trashType })
         });
         const result = await response.json();
-        return result;
+        return result; // 서버에서 반환되는 데이터가 포함된 result 객체를 반환
     } catch (error) {
         console.error('Error:', error);
     }
@@ -29,24 +29,40 @@ const Trash = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [showPopup4, setShowPopup4] = useState(false);
     const [showPopup6, setShowPopup6] = useState(false);
-    const [prevScore, setPrevScore] = useState(0);
 
     const handleClick = async (type) => {
+        const typeMapping = {
+            '플라스틱': 'plastic',
+            '비닐': 'vinyl',
+            '캔': 'can',
+            '일반쓰레기': 'general'
+        };
+        const trashType = typeMapping[type];
+    
+        // 함수형 업데이트로 현재 값을 바로 반영
         setSelectedOption(type);
-
-        const result = await trashDivision(type);
-
-        setTimeout(() => {
-            if (result && result.score > prevScore) {
-                setPrevScore(result.score);
-                setShowPopup6(true);  // 정답일 경우 Popup6 표시
-            } else if (result && result.score <= prevScore) {
-                setPrevScore(result.score);
-                setShowPopup4(true);  // 오답일 경우 Popup4 표시
+        await trashDivision(type); // 상태가 변경된 이후 작업
+    
+        console.log(`Button clicked: ${type}, Sending trash type: ${trashType}`);
+    
+        try {
+            const result = await trashDivision(type);
+    
+            console.log('Server Response:', result);
+    
+            if (result) {
+                if (result.result === 'Right') {
+                    setShowPopup6(true);
+                } else if (result.result === 'Wrong') {
+                    setShowPopup4(true);
+                }
             }
-        });
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
-
+    
+    
     const handleClosePopup4 = () => {
         setShowPopup4(false);
     };

@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
 import dollar from './dollar.png';
-import home from './home.png';  // Import home.png
+import home from './home.png';
 
 const Mypage = ({ nickname }) => {
   const [trashCounts, setTrashCounts] = useState([]);
@@ -64,7 +64,7 @@ const Mypage = ({ nickname }) => {
   };
 
   const handleHomeClick = () => {
-    navigate('/'); // Navigate to Pad.js
+    navigate('/');
   };
 
   const labels = ['플라스틱', '비닐', '캔', '일반쓰레기'];
@@ -130,14 +130,14 @@ const Mypage = ({ nickname }) => {
         style={{
           position: 'absolute',
           top: '10px',
-          right: '10px', // Place the home icon in the top-right corner
+          right: '10px',
           width: '40px',
           height: '40px',
           cursor: 'pointer',
         }}
         onClick={handleHomeClick}
       />
-      
+
       <div style={{ marginLeft: '470px', marginTop: '60px' }}>
         <h1 style={{ fontSize: '60px', position: 'relative' }}>{nickname}</h1>
       </div>
@@ -200,6 +200,7 @@ const Mypage = ({ nickname }) => {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'flex-start',
+              overflowY: 'auto', // 스크롤 가능
             }}
           >
             <div

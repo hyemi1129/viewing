@@ -35,9 +35,9 @@ const Popup3 = () => {
       <div className="popup-content">
         <div className="text-content">
           <img src={coin} alt="coin" style={{ margin: '19px auto', display: 'block', width: '70px', height: 'auto' }} />
-          캐시 획득
+          
           <p style={{ fontSize: '15px', fontWeight: 'normal', color: 'gray' }}>
-            +100캐시<br />분리수거로 캐시를 획득했어요
+            
           </p>
         </div>
         <div className="button-container">
