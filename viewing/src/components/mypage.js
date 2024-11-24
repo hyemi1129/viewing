@@ -6,10 +6,13 @@ import 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
 import dollar from './dollar.png';
 import home from './home.png';
+import dollar2 from './dollar2.png';
 
 const Mypage = ({ nickname }) => {
   const [trashCounts, setTrashCounts] = useState([]);
   const [score, setScore] = useState(0);
+  const [rank, setRank] = useState(null);
+  const [userNickname, setUserNickname] = useState('');
   const [loading, setLoading] = useState(true);
   const [rankings, setRankings] = useState([]);
   const navigate = useNavigate();
@@ -31,37 +34,30 @@ const Mypage = ({ nickname }) => {
       }
     };
 
-    const fetchScore = async () => {
+    const fetchScoreAndRank = async () => {
       try {
-        const response = await fetch('/get-latest-score');
+        const response = await fetch('/get-user-score');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setScore(data.score);
-      } catch (error) {
-        console.error('Error fetching score:', error);
-      }
-    };
+        setUserNickname(data.nickname);
 
-    const fetchRankings = async () => {
-      try {
-        const response = await fetch('/rankings');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        setRankings(data);
+        const rankingsResponse = await fetch('/rankings');
+        if (!rankingsResponse.ok) throw new Error('Network response was not ok');
+        const rankingsData = await rankingsResponse.json();
+        setRankings(rankingsData);
+
+        const userRank = rankingsData.findIndex(rank => rank.nickname === data.nickname) + 1;
+        setRank(userRank);
       } catch (error) {
-        console.error('Error fetching rankings:', error);
+        console.error('Error fetching score or rank:', error);
       }
     };
 
     fetchTrashCounts();
-    fetchScore();
-    fetchRankings();
+    fetchScoreAndRank();
     setLoading(false);
   }, [nickname]);
-
-  const handleBackClick = () => {
-    navigate('/trash');
-  };
 
   const handleHomeClick = () => {
     navigate('/');
@@ -124,6 +120,47 @@ const Mypage = ({ nickname }) => {
 
   return (
     <div>
+      {/* 고정된 파란색 네모 박스 */}
+      <div
+        style={{
+          width: '309px',
+          height: '70px',
+          backgroundColor: '#0079FF',
+          borderTopLeftRadius: '35px',
+          borderTopRightRadius: '35px',
+          position: 'fixed',
+          top: '610px',
+          left: '828px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontFamily: 'Arial, sans-serif',
+          color: 'white',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          zIndex: 1000,
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+          padding: '0 20px',
+        }}
+      >
+        <span style={{ fontWeight: 'bold', fontSize: '18px' }}>
+          {rank}위&nbsp;&nbsp;&nbsp;{userNickname}
+        </span>
+        <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
+          <img
+            src={dollar2}
+            alt="dollar2"
+            style={{
+              width: '20px',
+              height: '20px',
+              marginRight: '8px',
+              verticalAlign: 'middle',
+            }}
+          />
+          {score}점
+        </span>
+      </div>
+
       <img
         src={home}
         alt="Home"
@@ -161,57 +198,33 @@ const Mypage = ({ nickname }) => {
             <div style={{ width: '100%', height: '100%' }}>
               <Bar data={data} options={options} />
             </div>
-            <div
-              style={{
-                position: 'absolute',
-                top: '80px',
-                left: '315px',
-                transform: 'translateX(-50%)',
-                width: '200px',
-                height: '50px',
-                backgroundColor: 'white',
-                borderRadius: '50px',
-                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                paddingLeft: '10px',
-              }}
-            >
-              <img
-                src={dollar}
-                alt="Dollar"
-                style={{ width: '17px', height: '17px', marginLeft: '5px' }}
-              />
-              <span style={{ fontSize: '20px', marginLeft: '100px' }}>{score} 점</span>
-            </div>
           </div>
 
           <div
             style={{
               marginLeft: '20px',
-              width: '400px',
+              width: '420px',
               height: '600px',
               backgroundColor: 'white',
-              borderRadius: '50px',
+              borderRadius: '40px',
               boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
               marginTop: '20px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'flex-start',
-              overflowY: 'auto', // 스크롤 가능
+              overflowY: 'auto',
             }}
           >
             <div
               style={{
-                marginTop: '20px',
+                marginTop: '30px',
                 fontSize: '20px',
                 color: 'black',
                 textAlign: 'center',
               }}
             >
-              이번 달 등수는
+              <b>이번 달 등수는</b>
             </div>
             {rankings.map((rank, index) => (
               <div
@@ -224,8 +237,8 @@ const Mypage = ({ nickname }) => {
                   backgroundColor: 'white',
                   borderRadius: '50px',
                   padding: '20px',
-                  width: '80%',
-                  height: '40px',
+                  width: '70%',
+                  height: '23px',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -233,7 +246,19 @@ const Mypage = ({ nickname }) => {
                 }}
               >
                 <span>{rank.rank}위 {rank.nickname}</span>
-                <span>{rank.score} 점</span>
+                <span>
+                  <img
+                    src={dollar}
+                    alt="dollar"
+                    style={{
+                      width: '18px',
+                      height: '18px',
+                      marginRight: '5px',
+                      verticalAlign: 'middle',
+                    }}
+                  />
+                  {rank.score} 점
+                </span>
               </div>
             ))}
           </div>
