@@ -106,6 +106,10 @@ const Quiz = () => {
     }
   };
 
+  const handleRefreshButtonClick = () => {
+    window.location.reload();
+  };
+
   const renderSolution = (solution) => {
     const keywords = ['일반쓰레기', '종이', '비닐', '플라스틱'];
     let result = [];
@@ -115,7 +119,7 @@ const Quiz = () => {
       tempString += solution[i];
       
       // 20글자마다 줄바꿈
-      if (tempString.length >= 20) {
+      if (tempString.length >= 17) {
         result.push(
           <span key={i}>
             {highlightKeywords(tempString)}<br />
@@ -180,6 +184,11 @@ const Quiz = () => {
             </Button>
           </div>
         )}
+
+        {/* 새로고침 버튼 추가 */}
+        <Button style={refreshButtonStyle} onClick={handleRefreshButtonClick}>
+          새로고침
+        </Button>
       </div>
     </div>
   );
@@ -223,6 +232,18 @@ const nextButtonStyle = {
   marginTop: '20px',
   padding: '15px 30px',
   fontSize: '20px',
+  backgroundColor: '#007bff',
+  color: 'white',
+  border: 'none',
+  borderRadius: '10px',
+  cursor: 'pointer',
+  fontWeight: 'bold',
+};
+
+const refreshButtonStyle = {
+  marginTop: '10px',
+  padding: '10px 20px',
+  fontSize: '16px',
   backgroundColor: '#007bff',
   color: 'white',
   border: 'none',

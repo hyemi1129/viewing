@@ -38,15 +38,12 @@ const Trash = () => {
             '일반쓰레기': 'general'
         };
         const trashType = typeMapping[type];
-    
-        // 함수형 업데이트로 현재 값을 바로 반영
+        
+        // 상태가 변경된 후 바로 작업을 진행
         setSelectedOption(type);
-        await trashDivision(type); // 상태가 변경된 이후 작업
-    
-        console.log(`Button clicked: ${type}, Sending trash type: ${trashType}`);
     
         try {
-            const result = await trashDivision(type);
+            const result = await trashDivision(type); // trashDivision 한 번만 호출
     
             console.log('Server Response:', result);
     
@@ -61,6 +58,7 @@ const Trash = () => {
             console.error('Error:', error);
         }
     };
+    
     
     
     const handleClosePopup4 = () => {

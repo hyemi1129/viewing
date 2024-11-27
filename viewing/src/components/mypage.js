@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
 import dollar from './dollar.png';
-import home from './home.png';
+import home from './home2.png';
 import dollar2 from './dollar2.png';
 
 const Mypage = ({ nickname }) => {
@@ -143,6 +143,29 @@ const Mypage = ({ nickname }) => {
           padding: '0 20px',
         }}
       >
+      {/* 고정된 빨간색 네모 박스 */}
+        <div
+          style={{
+            width: '250px',
+            height: '100px',
+            position: 'fixed',
+            fontFamily: 'Arial, sans-serif',
+            bottom: '570px',
+            left: '360px',
+            zIndex: 1000,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'black',
+            fontSize: '55px',
+            fontWeight: 'bold',
+            borderRadius: '10px',
+          }}
+        >
+          {userNickname || '없음'} 님
+        </div>
+
+
         <span style={{ fontWeight: 'bold', fontSize: '18px' }}>
           {rank}위&nbsp;&nbsp;&nbsp;{userNickname}
         </span>
